@@ -53,6 +53,7 @@ jobs:
           PR_LABELS=$(gh pr view ${{ steps.pr_number.outputs.pr_num}} --json labels --jq '.[]')
           LABELS=$(echo "$PR_LABELS" | jq -r '.[].name')
 
+
           if echo "$LABELS" | grep -q "bump version after merge"; then
             echo "Bump required"
             echo "should_bump=true" >> $GITHUB_OUTPUT
