@@ -1,0 +1,27 @@
+{
+  "name": "gh-workflow-scrapbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "first-changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amazinglynormal/gh-workflow-scrapbook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/amazinglynormal/gh-workflow-scrapbook/issues"
+  },
+  "homepage": "https://github.com/amazinglynormal/gh-workflow-scrapbook#readme",
+  "devDependencies": {
+    "conventional-changelog-cli": "^5.0.0",
+    "jest": "^30.0.4"
+  }
+}
