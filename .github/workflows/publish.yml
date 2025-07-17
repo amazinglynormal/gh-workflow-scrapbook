@@ -111,6 +111,15 @@ jobs:
         run: |
           git push
 
+      - name: Upload updated files
+        uses: actions/upload-artifact@v4
+        with:
+          name: updated-files
+          path: |
+            package.json
+            package-lock.json
+            CHANGELOG.md
+
   publish:
     needs: [test, bump-version]
     runs-on: ubuntu-latest
@@ -118,6 +127,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Download updates files
+        uses: actions/download-artifact@v4
+        with:
+          name: updated-files
 
       - name: Set up Node
         uses: actions/setup-node@v4
