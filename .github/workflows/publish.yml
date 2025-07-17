@@ -60,6 +60,8 @@ jobs:
             echo "No bump label, skipping"
             echo "should_bump=false" >> $GITHUB_OUTPUT
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fetch PR commit messages
         if: steps.check_labels.outputs.should_bump == 'true'
@@ -71,6 +73,8 @@ jobs:
 
           echo "Commit messages:"
           cat messages.txt
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Determine version bump
         if: steps.check_labels.outputs.should_bump == 'true'
@@ -107,7 +111,7 @@ jobs:
           git push
 
   publish:
-    needs: test
+    needs: [test, bump-version]
     runs-on: ubuntu-latest
 
     steps:
