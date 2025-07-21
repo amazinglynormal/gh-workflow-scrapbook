@@ -61,4 +61,4 @@ jobs:
 
       - name: Push updated package.json and changelog
         run: |
-          git push
+          git push origin HEAD:${{ github.head_ref}}
