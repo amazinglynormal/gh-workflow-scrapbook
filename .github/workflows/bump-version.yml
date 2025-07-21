@@ -30,6 +30,8 @@ jobs:
 
             echo "Commit messages:"
             cat messages.txt
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Determine version bump
         id: bump
