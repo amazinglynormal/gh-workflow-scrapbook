@@ -38,10 +38,23 @@ jobs:
           node-version: "22"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Check for version bump
+        id: version_check
+        run: |
+          if git diff origin/main HEAD -- package.json | grep '"version":'; then
+            echo "Version bump detected."
+            echo "publish=true" >> $GITHUB_OUTPUT
+          else
+            echo "No Version bump detected."
+            echo "publish=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Install dependencies and build
+        if: steps.version_check.outputs.publish == 'true'
         run: npm ci && npm run build
 
       - name: Publish to npm
+        if: steps.version_check.outputs.publish == 'true'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
